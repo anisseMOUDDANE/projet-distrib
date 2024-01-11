@@ -23,12 +23,13 @@ function LoginComponent() {
       console.log(response)
       if (response.ok) {
         navigate('/');
+        sessionStorage.setItem('log', "1");
       } else {
         toast({
           title: "Authentication failed.",
           description: "Failed to authenticate user.",
           status: "error",
-          duration: 9000,
+          duration: 3000,
           isClosable: true,
         });
       }
@@ -37,7 +38,7 @@ function LoginComponent() {
         title: "Error occurred.",
         description: "An error occurred while attempting to login.",
         status: "error",
-        duration: 9000,
+        duration: 3000,
         isClosable: true,
       });
     }

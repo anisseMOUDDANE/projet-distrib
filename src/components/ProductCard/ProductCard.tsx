@@ -12,38 +12,39 @@ import {
   Divider,
   Button,
   Badge,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
-import getUrlImageById from '../../services/img';
-import { useNavigate } from 'react-router-dom';
-
+import getUrlImageById from "../../services/img";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
-  const toast = useToast()
+  const toast = useToast();
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate('/product', { state: { product } });
+    navigate("/product", { state: { product } });
   };
 
   const handleClickAddToCart = () => {
     toast({
-          title: 'Article Ajouté',
-          description: "L'article "+ product.name + " à bien été ajouté au Panier ",
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        })
-        onAddToCart(product)
-      }
-      
-  
+      title: "Article Ajouté",
+      description:
+        "L'article " + product.name + " à bien été ajouté au Panier ",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+    onAddToCart(product);
+  };
+
   return (
     <div className="product-card" onClick={handleCardClick}>
-      <Card maxW="sm">
+      <Card
+        style={{ display: "flex", flexDirection: "column", height: "100%" }}
+      >
         <CardBody>
           <Image
-            src= {getUrlImageById(product.id)}
+            src={getUrlImageById(product.id)}
             alt="Green double couch with wooden legs"
             borderRadius="lg"
           />
@@ -54,19 +55,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </Text>
           </Stack>
           <Stack direction="row">
-            { !product.sugarFree ? <Badge colorScheme="red">Sucrée</Badge> : <Badge colorScheme="green"> Sans Sucre</Badge> }
-            { product.sparkling ? <Badge colorScheme="black">Gaseux</Badge> : <Badge> Sans Gaz</Badge> }
+            {!product.sugarFree ? (
+              <Badge colorScheme="red">Sucrée</Badge>
+            ) : (
+              <Badge colorScheme="green"> Sans Sucre</Badge>
+            )}
+            {product.sparkling ? (
+              <Badge colorScheme="black">Gazeux</Badge>
+            ) : (
+              <Badge> Sans Gaz</Badge>
+            )}
           </Stack>
         </CardBody>
         <Divider />
-        <CardFooter>
-          <Button colorScheme="gray" onClick={handleClickAddToCart} >
+        <CardFooter style={{ marginTop: "auto" }}>
+          <Button colorScheme="gray" onClick={handleClickAddToCart}>
             Ajouter au panier
           </Button>
         </CardFooter>
       </Card>
-
-      
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   ListIcon,
   OrderedList,
   UnorderedList,
+  Heading,
 } from '@chakra-ui/react'
 
 function DashboardComponent() {
@@ -14,13 +15,16 @@ function DashboardComponent() {
       <Flex width="90%" height={500}>
         <Container borderWidth={2} width="50%"
           height="100%" borderColor={'black'} borderRadius={10}
+          className='data-popu' display="flex" flexDirection="column"
+          justifyContent="center" alignContent="center"
         >
-          A
+          <Heading as='h5' size='sm' textAlign="center">L'article le plus  populaire : </Heading>
+          <Heading as='h5' size='sm' textAlign="center">L'article le moins populaire : </Heading>
         </Container>
         <Container width="40%"
           height="100%"
         >
-          <Text>Classement</Text>
+          <Heading textAlign="center" as="h2">Classement</Heading>
           <Flex justifyContent="center" alignItems="center" height="100%">
             <UnorderedList>
               <ListItem>Lorem ipsum dolor sit amet</ListItem>

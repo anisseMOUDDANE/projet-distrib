@@ -1,0 +1,72 @@
+[
+    {
+      "id": 0,
+      "name": "Coca Cola Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 1,
+      "name": "S.Pellegrino Bouteille",
+      "price": 1.2
+    },
+    {
+      "id": 2,
+      "name": "Cristalline Bouteille",
+      "price": 1
+    },
+    {
+      "id": 3,
+      "name": "Volvic Zest Citron Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 4,
+      "name": "Coca Cola Cherry Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 5,
+      "name": "Coca Cola Zero Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 6,
+      "name": "Oasis Tropical Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 7,
+      "name": "Powerade Bleue Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 8,
+      "name": "Fuze Tea Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 9,
+      "name": "Fuze Tea Menthe Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 10,
+      "name": "Orangina Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 11,
+      "name": "Volvic Juice Fraise Bouteille",
+      "price": 1.5
+    },
+    {
+      "id": 12,
+      "name": "Volvic Juice Exotique",
+      "price": 1.5
+    },
+    {
+      "id": 83,
+      "name": "Sprite Bouteille",
+      "price": 1.5
+    }
+  ]

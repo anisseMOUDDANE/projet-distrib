@@ -35,12 +35,6 @@ Installation
 
 Assurez-vous d'avoir Node.js installé sur votre machine.
 
-Configuration
--------------
-
-1.  Copiez le fichier `.env.example` et renommez-le en `.env`.
-2.  Modifiez les variables d'environnement en fonction de votre configuration.
-
 Contribution
 ------------
 

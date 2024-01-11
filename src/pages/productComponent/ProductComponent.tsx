@@ -5,7 +5,8 @@ import {
     Badge,
     useColorModeValue,
     Stack,
-    Tag
+    Tag,
+    Flex
   } from '@chakra-ui/react';
   import { useLocation } from 'react-router-dom';
 
@@ -24,7 +25,8 @@ import {
     const textColor = useColorModeValue('gray.800', 'white');
   
     return (
-        <Box
+        <Flex justifyContent="center" alignContent="center" padding={10}>
+           <Box
             p={5}
             shadow="md"
             borderWidth="1px"
@@ -32,6 +34,8 @@ import {
             bg={bgColor}
             borderRadius="lg"
             position="relative"
+            width={800}
+            height={600}
         >
             <Tag
                 size="sm"
@@ -51,7 +55,9 @@ import {
                 {sugarfree && <Badge colorScheme="green">Sugar Free</Badge>}
                 {gazeous && <Badge colorScheme="blue">Gazeous</Badge>}
             </Stack>
-        </Box>
+        </Box> 
+        </Flex>
+        
     );
   }
   

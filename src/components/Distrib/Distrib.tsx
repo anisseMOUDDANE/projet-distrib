@@ -15,9 +15,10 @@ import {
   ModalCloseButton,
   Button,
 } from "@chakra-ui/react";
+import axios from "axios"; // Importez Axios
 
 export default function Distrib() {
-  const products: Product[] = [
+  /*const products: Product[] = [
     {
       id: 0,
       name: "Coca Cola Bouteille",
@@ -130,10 +131,16 @@ export default function Distrib() {
       sugarfree: false,
       gazeous: true,
     },
-  ];
+  ];*/
+
+
   const [cart, setCart] = useState<{ product: Product; quantity: number }[]>(
     []
-  );
+  );  
+
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const [cartItemCount, setCartItemCount] = useState(0.00);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -162,6 +169,27 @@ export default function Distrib() {
     setCart(updatedCart);
   };
 
+
+  const validateCart = () => {
+    // Mettez à jour le nombre d'articles dans le panier lors de la validation
+    const totalCount = cart.reduce((total, item) => total + item.product.price, 0);
+    setCartItemCount(totalCount.toLocaleString()); // Utilisez toLocaleString pour formater le nombre
+    // ... Autres logiques de validation si nécessaire
+  };
+
+
+  useEffect(() => {
+    // Effectuer l'appel API pour récupérer les produits
+    axios.get("https://0pah.dev:8081/api/products")
+      .then(response => {
+        setProducts(response.data);
+      })
+      .catch(error => {
+        console.error("Erreur lors de la récupération des produits :", error);
+      });
+  }, []);
+
+
   useEffect(() => {
     if (cart.length === 0 && closeModalButton.current != null) {
       //closeModalButton.current.click()
@@ -173,6 +201,7 @@ export default function Distrib() {
       
       <div className="custom-header">
       <h1>Produit disponibles</h1>
+      <div className="cart-counter">{cartItemCount} €</div>
       <Button leftIcon={ <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />} onClick={onOpen} colorScheme='blue' variant='solid'  size='lg'>
     Panier
   </Button>
@@ -225,12 +254,12 @@ export default function Distrib() {
           <ModalFooter>
             { cart.length > 0 ? <span className="total">TOTAL : {cartTotal.toFixed(2)}€</span> : null}
             <Button colorScheme="gray" mr={3} onClick={onClose}>
-              Close
+              Close 
             </Button>
             { cart.length > 0 ? (
-            <Button colorScheme="green" mr={3} onClick={onClose}>
+            <Button colorScheme="green" mr={3} onClick={() => { onClose(); validateCart();}}>
               Validé ! 
-            </Button>) : ""
+            </Button>) : null
             }
           </ModalFooter>
         </ModalContent>

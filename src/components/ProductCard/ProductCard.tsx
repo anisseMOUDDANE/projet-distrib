@@ -46,8 +46,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </Text>
           </Stack>
           <Stack direction="row">
-            { product.sugarfree == false ? <Badge colorScheme="red">Sucrée</Badge> : <Badge colorScheme="green"> Sans Sucre</Badge> }
-            { product.gazeous == true ? <Badge colorScheme="black">Sucrée</Badge> : <Badge> Sans Sucre</Badge> }
+            { !product.sugarfree ? <Badge colorScheme="red">Sucrée</Badge> : <Badge colorScheme="green"> Sans Sucre</Badge> }
+            { product.gazeous ? <Badge colorScheme="black">Gaseux</Badge> : <Badge> Sans Gaz</Badge> }
           </Stack>
         </CardBody>
         <Divider />

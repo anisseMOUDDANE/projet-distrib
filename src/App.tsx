@@ -7,6 +7,7 @@
   import Navbar from './components/Navbar/Navbar';
   import './App.css';
   import { ChakraProvider } from '@chakra-ui/react'
+  import Footer from './components/Footer/Footer'
 
   function App() {
     return (
@@ -21,6 +22,7 @@
             <Route path="/parametres" element={<Parametre />} />
             <Route path="/product" element={<ProductComponent />} />
           </Routes>
+          <Footer/>
         </div>
       </Router>
       </ChakraProvider>

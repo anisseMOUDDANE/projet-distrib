@@ -14,9 +14,16 @@ import {
   Badge,
   useToast
 } from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom';
+
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const toast = useToast()
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/product', { state: { product } });
+  };
 
   const handleClickAddToCart = () => {
     toast({
@@ -31,7 +38,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       
   
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={handleCardClick}>
       <Card maxW="sm">
         <CardBody>
           <Image

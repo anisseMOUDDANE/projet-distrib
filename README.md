@@ -28,7 +28,7 @@ Technologies Utilisées
 Installation
 ------------
 
-1.  Clonez le dépôt : `git clone [[lien du dépôt](https://github.com/anisseMOUDDANE/projet-distrib)]`
+1.  Clonez le dépôt : `git clone [lien du dépôt](https://github.com/anisseMOUDDANE/projet-distrib)`
 2.  Accédez au répertoire du projet : `cd projet-distrib-main`
 3.  Installez les dépendances : `npm install`
 4.  Lancez l'application : `npm run dev`

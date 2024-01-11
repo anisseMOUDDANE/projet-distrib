@@ -1,38 +1,35 @@
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  width: calc(25% - 32px); /* 25% pour 4 cartes par ligne avec marges */
 
-  
-  .product-card {
-    border: 1px solid #ddd;
+  img {
+    max-width: 100%;
     border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    width: calc(25% - 32px); /* 25% pour 4 cartes par ligne avec marges */
-  
-    img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
-  
-    h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-  
-    p {
-      color: #666;
-    }
-  
-    button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 8px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    &:hover{
-      border: solid;
-      border-color: lightgray;
-    }
+    margin-bottom: 12px;
   }
-  
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #666;
+  }
+
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  &:hover {
+    border: solid;
+    border-color: lightgray;
+  }
+}

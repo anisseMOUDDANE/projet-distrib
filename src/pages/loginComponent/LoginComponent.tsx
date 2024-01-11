@@ -13,6 +13,7 @@ function LoginComponent() {
     try {
       console.log(email, password);
       const response = await fetch("https://0pah.dev:8081/api/auth/login", {
+        // mettre api angel
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,8 +23,8 @@ function LoginComponent() {
       });
       console.log(response);
       if (response.ok) {
-        navigate("/");
-        sessionStorage.setItem("log", "1");
+        navigate("/"); // Redirection vers la page d'accueil
+        sessionStorage.setItem("log", "1"); // Stockage de l'état de connexion
         window.location.reload();
       } else {
         toast({
@@ -41,7 +42,7 @@ function LoginComponent() {
         status: "error",
         duration: 3000,
         isClosable: true,
-      });
+      }); // Affichage d'un toast
     }
   };
 

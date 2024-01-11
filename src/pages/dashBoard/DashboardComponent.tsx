@@ -26,10 +26,10 @@ function DashboardComponent() {
           alignContent="center"
         >
           <Heading as="h5" size="sm" textAlign="center">
-            L'article le plus populaire : Cristalline Bouteille{" "}
+            L'article le plus populaire : Cristalline Bouteille
           </Heading>
           <Heading as="h5" size="sm" textAlign="center">
-            L'article le moins populaire : Fuze Tea Menthe Bouteille{" "}
+            L'article le moins populaire : Fuze Tea Menthe Bouteille
           </Heading>
         </Container>
         <Container width="40%" height="100%">

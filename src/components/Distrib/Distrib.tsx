@@ -144,38 +144,41 @@ export default function Distrib() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const closeModalButton = useRef(null);
+  const closeModalButton = useRef(null); // Créez une référence pour le bouton de fermeture de la modale
 
   const [cartTotal, setCartTotal] = useState(0);
   const addToCart = (product: Product) => {
-    const existingItem = cart.find((item) => item.product.id === product.id);
+    const existingItem = cart.find((item) => item.product.id === product.id); // Vérifiez si le produit existe déjà dans le panier
 
-    setCartTotal(cartTotal + product.price);
+    setCartTotal(cartTotal + product.price); // Mettez à jour le total du panier
     if (existingItem) {
-      const updatedCart = cart.map((item) =>
-        item.product.id === existingItem.product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+      const updatedCart = cart.map(
+        (
+          item // Mettez à jour la quantité si le produit existe déjà dans le panier
+        ) =>
+          item.product.id === existingItem.product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
       );
-      setCart(updatedCart);
+      setCart(updatedCart); // Mettez à jour le panier
     } else {
-      setCart([...cart, { product, quantity: 1 }]);
+      setCart([...cart, { product, quantity: 1 }]); // Ajoutez le produit au panier
     }
   };
 
   const removeFromCart = (productId: number, productPrice: number) => {
     setCartTotal(cartTotal - productPrice);
-    const updatedCart = cart.filter((item) => item.product.id !== productId);
+    const updatedCart = cart.filter((item) => item.product.id !== productId); // Supprimez le produit du panier
     setCart(updatedCart);
   };
 
   const validateCart = () => {
     // Mettez à jour le nombre d'articles dans le panier lors de la validation
     const totalCount = cart.reduce(
-      (total, item) => total + item.product.price,
+      (total, item) => total + item.product.price, // Ajoutez le prix de chaque produit au total
       0
     );
-    setCartItemCount(totalCount.toLocaleString());
+    setCartItemCount(totalCount.toLocaleString()); // Mettez à jour le nombre d'articles dans le panierm convertissez le nombre en chaîne de caractères
 
     cart.forEach((element) => {
       const objToSend = {
@@ -183,7 +186,7 @@ export default function Distrib() {
         productId: element.product.id,
         number: 1,
       };
-      const apiUrl = "https://0pah.dev:8081/api/products/stolen";
+      const apiUrl = "https://0pah.dev:8081/api/products/stolen"; // mettre api angel
 
       axios
         .post(apiUrl, objToSend)
@@ -199,7 +202,7 @@ export default function Distrib() {
   useEffect(() => {
     // Effectuer l'appel API pour récupérer les produits
     axios
-      .get("https://0pah.dev:8081/api/products")
+      .get("https://0pah.dev:8081/api/products") // mettre api angel
       .then((response) => {
         setProducts(response.data);
       })

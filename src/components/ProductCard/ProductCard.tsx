@@ -19,10 +19,10 @@ import { useNavigate } from "react-router-dom";
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const toast = useToast();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook de navigation
 
   const handleCardClick = () => {
-    navigate("/product", { state: { product } });
+    navigate("/product", { state: { product } }); // Redirection vers la page product
   };
 
   const handleClickAddToCart = () => {
@@ -33,8 +33,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       status: "success",
       duration: 2000,
       isClosable: true,
-    });
-    onAddToCart(product);
+    }); // Affichage d'un toast
+    onAddToCart(product); // Appel de la fonction onAddToCart
   };
 
   return (

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Product } from "../../interfaces/Product";
-import {  useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import {
   Modal,
   ModalOverlay,
@@ -16,6 +16,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import axios from "axios"; // Importez Axios
+import { Spinner } from '@chakra-ui/react'
 
 export default function Distrib() {
   /*const products: Product[] = [
@@ -24,133 +25,132 @@ export default function Distrib() {
       name: "Coca Cola Bouteille",
       price: 1.5,
       imageUrl: "url_image_coca_cola",
-      sugarfree: false,
-      gazeous: true,
+      sugarFree: false,
+      sparkling: true,
     },
     {
       id: 1,
       name: "S.Pellegrino Bouteille",
       price: 1.2,
       imageUrl: "url_image_pellegrino",
-      sugarfree: true,
-      gazeous: true,
+      sugarFree: true,
+      sparkling: true,
     },
     {
       id: 2,
       name: "Cristalline Bouteille",
       price: 1,
       imageUrl: "url_image_cristalline",
-      sugarfree: true,
-      gazeous: false,
+      sugarFree: true,
+      sparkling: false,
     },
     {
       id: 3,
       name: "Volvic Zest Citron Bouteille",
       price: 1.5,
       imageUrl: "url_image_zest_citron",
-      sugarfree: false,
-      gazeous: true,
+      sugarFree: false,
+      sparkling: true,
     },
     {
       id: 4,
       name: "Coca Cola Cherry Bouteille",
       price: 1.5,
       imageUrl: "url_image_coca_cherry",
-      sugarfree: false,
-      gazeous: true,
+      sugarFree: false,
+      sparkling: true,
     },
     {
       id: 5,
       name: "Coca Cola Zero Bouteille",
       price: 1.5,
       imageUrl: "url_image_coca_zero",
-      sugarfree: true,
-      gazeous: true,
+      sugarFree: true,
+      sparkling: true,
     },
     {
       id: 6,
       name: "Oasis Tropical Bouteille",
       price: 1.5,
       imageUrl: "url_image_oasis_tropical",
-      sugarfree: false,
-      gazeous: false,
+      sugarFree: false,
+      sparkling: false,
     },
     {
       id: 7,
       name: "Powerade Bleue Bouteille",
       price: 1.5,
       imageUrl: "url_image_powerade_bleue",
-      sugarfree: false,
-      gazeous: true,
+      sugarFree: false,
+      sparkling: true,
     },
     {
       id: 8,
       name: "Fuze Tea Bouteille",
       price: 1.5,
       imageUrl: "url_image_fuze_tea",
-      sugarfree: false,
-      gazeous: false,
+      sugarFree: false,
+      sparkling: false,
     },
     {
       id: 9,
       name: "Fuze Tea Menthe Bouteille",
       price: 1.5,
       imageUrl: "url_image_fuze_tea_menthe",
-      sugarfree: false,
-      gazeous: false,
+      sugarFree: false,
+      sparkling: false,
     },
     {
       id: 10,
       name: "Orangina Bouteille",
       price: 1.5,
       imageUrl: "url_image_orangina",
-      sugarfree: false,
-      gazeous: true,
+      sugarFree: false,
+      sparkling: true,
     },
     {
       id: 11,
       name: "Volvic Juice Fraise Bouteille",
       price: 1.5,
       imageUrl: "url_image_volvic_juice_fraise",
-      sugarfree: false,
-      gazeous: false,
+      sugarFree: false,
+      sparkling: false,
     },
     {
       id: 12,
       name: "Volvic Juice Exotique",
       price: 1.5,
       imageUrl: "url_image_volvic_juice_exotique",
-      sugarfree: false,
-      gazeous: false,
+      sugarFree: false,
+      sparkling: false,
     },
     {
       id: 83,
       name: "Sprite Bouteille",
       price: 1.5,
       imageUrl: "url_image_sprite",
-      sugarfree: false,
-      gazeous: true,
+      sugarFree: false,
+      sparkling: true,
     },
   ];*/
 
-
   const [cart, setCart] = useState<{ product: Product; quantity: number }[]>(
     []
-  );  
+  );
 
   const [products, setProducts] = useState<Product[]>([]);
 
-  const [cartItemCount, setCartItemCount] = useState(0.00);
+  const [cartItemCount, setCartItemCount] = useState(0.0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const closeModalButton = useRef(null);
 
-  const [cartTotal, setCartTotal] = useState(0)
+  const [cartTotal, setCartTotal] = useState(0);
   const addToCart = (product: Product) => {
     const existingItem = cart.find((item) => item.product.id === product.id);
 
-    setCartTotal(cartTotal + product.price)
+    setCartTotal(cartTotal + product.price);
     if (existingItem) {
       const updatedCart = cart.map((item) =>
         item.product.id === existingItem.product.id
@@ -164,31 +164,50 @@ export default function Distrib() {
   };
 
   const removeFromCart = (productId: number, productPrice: number) => {
-    setCartTotal(cartTotal - productPrice)
+    setCartTotal(cartTotal - productPrice);
     const updatedCart = cart.filter((item) => item.product.id !== productId);
     setCart(updatedCart);
   };
 
-
   const validateCart = () => {
     // Mettez à jour le nombre d'articles dans le panier lors de la validation
-    const totalCount = cart.reduce((total, item) => total + item.product.price, 0);
-    setCartItemCount(totalCount.toLocaleString()); // Utilisez toLocaleString pour formater le nombre
-    // ... Autres logiques de validation si nécessaire
+    const totalCount = cart.reduce(
+      (total, item) => total + item.product.price,
+      0
+    );
+    setCartItemCount(totalCount.toLocaleString());
+     
+    cart.forEach(element =>{
+      const objToSend = 
+        {
+          "userId": 0,
+          "productId": element.product.id,
+          "number": 1
+        }
+        const apiUrl = 'https://0pah.dev:8081/api/products/stolen';
+  
+        axios.post(apiUrl, objToSend)
+          .then(response => {
+            console.log('Réponse de l\'API:', response.data);
+          })
+          .catch(error => {
+            console.error('Erreur lors de l\'envoi à l\'API:', error);
+          });
+    })
   };
-
+  
 
   useEffect(() => {
     // Effectuer l'appel API pour récupérer les produits
-    axios.get("https://0pah.dev:8081/api/products")
-      .then(response => {
+    axios
+      .get("https://0pah.dev:8081/api/products")
+      .then((response) => {
         setProducts(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Erreur lors de la récupération des produits :", error);
       });
   }, []);
-
 
   useEffect(() => {
     if (cart.length === 0 && closeModalButton.current != null) {
@@ -198,14 +217,29 @@ export default function Distrib() {
 
   return (
     <div>
-      
       <div className="custom-header">
-      <h1>Produit disponibles</h1>
-      <div className="cart-counter">{cartItemCount} €</div>
-      <Button leftIcon={ <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />} onClick={onOpen} colorScheme='blue' variant='solid'  size='lg'>
-    Panier
-  </Button>
+        <h1>Produit disponibles</h1>
+        <div className="cart-counter">{cartItemCount} €</div>
+        <Button
+          leftIcon={
+            <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" />
+          }
+          onClick={onOpen}
+          colorScheme="blue"
+          variant="solid"
+          size="lg"
+        >
+          Panier
+        </Button>
       </div>
+      {products.length ===0 ? 
+        <Spinner
+        thickness='4px'
+        speed='0.65s'
+        emptyColor='gray.200'
+        color='blue.500'
+        size='xl'
+      /> : null}
       <div className="product-list">
         {products.map((product) => (
           <ProductCard
@@ -217,8 +251,6 @@ export default function Distrib() {
           />
         ))}
       </div>
-
-     
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -239,28 +271,39 @@ export default function Distrib() {
                       </p>
                       <button
                         className="remove-btn"
-                        onClick={() => removeFromCart(item.product.id, item.product.price)}
+                        onClick={() =>
+                          removeFromCart(item.product.id, item.product.price)
+                        }
                       >
                         Supprimer
                       </button>
                     </div>
                   ))}
                 </div>
-              ) : (  
+              ) : (
                 <p>Votre panier est vide.</p>
               )}
             </div>
           </ModalBody>
           <ModalFooter>
-            { cart.length > 0 ? <span className="total">TOTAL : {cartTotal.toFixed(2)}€</span> : null}
+            {cart.length > 0 ? (
+              <span className="total">TOTAL : {cartTotal.toFixed(2)}€</span>
+            ) : null}
             <Button colorScheme="gray" mr={3} onClick={onClose}>
-              Close 
+              Close
             </Button>
-            { cart.length > 0 ? (
-            <Button colorScheme="green" mr={3} onClick={() => { onClose(); validateCart();}}>
-              Validé ! 
-            </Button>) : null
-            }
+            {cart.length > 0 ? (
+              <Button
+                colorScheme="green"
+                mr={3}
+                onClick={() => {
+                  onClose();
+                  validateCart();
+                }}
+              >
+                Validé !
+              </Button>
+            ) : null}
           </ModalFooter>
         </ModalContent>
       </Modal>

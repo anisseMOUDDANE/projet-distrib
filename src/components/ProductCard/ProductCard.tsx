@@ -14,6 +14,7 @@ import {
   Badge,
   useToast
 } from "@chakra-ui/react";
+import getUrlImageById from '../../services/img';
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const toast = useToast()
@@ -23,7 +24,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           title: 'Article Ajouté',
           description: "L'article "+ product.name + " à bien été ajouté au Panier ",
           status: 'success',
-          duration: 3000,
+          duration: 2000,
           isClosable: true,
         })
         onAddToCart(product)
@@ -35,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       <Card maxW="sm">
         <CardBody>
           <Image
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            src= {getUrlImageById(product.id)}
             alt="Green double couch with wooden legs"
             borderRadius="lg"
           />
@@ -46,8 +47,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             </Text>
           </Stack>
           <Stack direction="row">
-            { !product.sugarfree ? <Badge colorScheme="red">Sucrée</Badge> : <Badge colorScheme="green"> Sans Sucre</Badge> }
-            { product.gazeous ? <Badge colorScheme="black">Gaseux</Badge> : <Badge> Sans Gaz</Badge> }
+            { !product.sugarFree ? <Badge colorScheme="red">Sucrée</Badge> : <Badge colorScheme="green"> Sans Sucre</Badge> }
+            { product.sparkling ? <Badge colorScheme="black">Gaseux</Badge> : <Badge> Sans Gaz</Badge> }
           </Stack>
         </CardBody>
         <Divider />

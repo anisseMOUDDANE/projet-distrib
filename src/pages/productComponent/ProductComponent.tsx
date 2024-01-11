@@ -9,7 +9,7 @@ import {
     Flex
   } from '@chakra-ui/react';
   import { useLocation } from 'react-router-dom';
-
+import getUrlImageById from '../../services/img';
   function ProductComponent() {
     const location = useLocation();
     const product = location.state?.product;
@@ -19,7 +19,9 @@ import {
         return <div>Product not found</div>;
     }
 
-    const { id, name, price, imageUrl, sugarfree, gazeous } = product;
+    const { id, name, price, imageUrl, sugarFree, sparkling } = product;
+
+    console.log(sugarFree, sparkling)
 
     const bgColor = useColorModeValue('gray.100', 'gray.700');
     const textColor = useColorModeValue('gray.800', 'white');
@@ -36,6 +38,10 @@ import {
             position="relative"
             width={800}
             height={600}
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
         >
             <Tag
                 size="sm"
@@ -46,14 +52,14 @@ import {
             >
                 ID: {id}
             </Tag>
-            <Image borderRadius="md" src={imageUrl} alt={name} objectFit="cover" />
-            <Text mt={4} fontSize="xl" fontWeight="semibold" lineHeight="short">
+            <Image borderRadius="md" src={getUrlImageById(id)} alt={name} objectFit="cover"  width={300}/>
+            <Text mt={4} fontSize="xl" fontWeight="semibold" lineHeight="short" textAlign="center">
                 {name}
             </Text>
-            <Text mt={2} color={textColor}>${price}</Text>
+            <Text mt={2} color={textColor} textAlign="center">${price}</Text>
             <Stack direction="row" mt={2}>
-                {sugarfree && <Badge colorScheme="green">Sugar Free</Badge>}
-                {gazeous && <Badge colorScheme="blue">Gazeous</Badge>}
+                {sugarFree && <Badge colorScheme="green">Sugar Free</Badge>}
+                {sparkling && <Badge colorScheme="blue">Gazeous</Badge>}
             </Stack>
         </Box> 
         </Flex>

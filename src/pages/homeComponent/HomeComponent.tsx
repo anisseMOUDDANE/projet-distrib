@@ -1,11 +1,12 @@
-import './HomeComponent.scss'
-import Distrib from '../../components/Distrib/Distrib'
+import "./HomeComponent.scss";
+import Distrib from "../../components/Distrib/Distrib";
+
 function HomeComponent() {
   return (
     <>
-      <Distrib/>
-   </>
-    )
+      <Distrib />
+    </>
+  );
 }
 
-export default HomeComponent
+export default HomeComponent;

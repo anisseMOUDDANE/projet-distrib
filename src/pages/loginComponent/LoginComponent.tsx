@@ -1,29 +1,30 @@
-import './LoginComponent.scss';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Input, Stack, Button, Text, useToast } from '@chakra-ui/react';
+import "./LoginComponent.scss";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Input, Stack, Button, Text, useToast } from "@chakra-ui/react";
 
 function LoginComponent() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const toast = useToast();
 
   const handleLogin = async () => {
     try {
-      console.log(email, password)
-      const response = await fetch('https://0pah.dev:8081/api/auth/login', {
-        method: 'POST',
+      console.log(email, password);
+      const response = await fetch("https://0pah.dev:8081/api/auth/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: 'include'  // Include credentials for cookie handling
+        credentials: "include", // Include credentials for cookie handling
       });
-      console.log(response)
+      console.log(response);
       if (response.ok) {
-        navigate('/');
-        sessionStorage.setItem('log', "1");
+        navigate("/");
+        sessionStorage.setItem("log", "1");
+        window.location.reload();
       } else {
         toast({
           title: "Authentication failed.",
@@ -45,24 +46,28 @@ function LoginComponent() {
   };
 
   return (
-    <div className='home-container'>
+    <div className="home-container">
       <Stack spacing={3}>
-        <Text fontSize='2xl' textAlign="center">Login</Text>
-        <Input 
-          placeholder='Email' 
-          size='md'
-          type='email'
+        <Text fontSize="2xl" textAlign="center">
+          Login
+        </Text>
+        <Input
+          placeholder="Email"
+          size="md"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <Input 
-          placeholder='Password' 
-          size='md'
-          type='password'
+        <Input
+          placeholder="Password"
+          size="md"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button colorScheme='blue' onClick={handleLogin}>Login</Button>
+        <Button colorScheme="blue" onClick={handleLogin}>
+          Login
+        </Button>
       </Stack>
     </div>
   );

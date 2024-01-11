@@ -16,7 +16,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import axios from "axios"; // Importez Axios
-import { Spinner } from '@chakra-ui/react'
+import { Spinner } from "@chakra-ui/react";
 
 export default function Distrib() {
   /*const products: Product[] = [
@@ -176,26 +176,25 @@ export default function Distrib() {
       0
     );
     setCartItemCount(totalCount.toLocaleString());
-     
-    cart.forEach(element =>{
-      const objToSend = 
-        {
-          "userId": 0,
-          "productId": element.product.id,
-          "number": 1
-        }
-        const apiUrl = 'https://0pah.dev:8081/api/products/stolen';
-  
-        axios.post(apiUrl, objToSend)
-          .then(response => {
-            console.log('Réponse de l\'API:', response.data);
-          })
-          .catch(error => {
-            console.error('Erreur lors de l\'envoi à l\'API:', error);
-          });
-    })
+
+    cart.forEach((element) => {
+      const objToSend = {
+        userId: 0,
+        productId: element.product.id,
+        number: 1,
+      };
+      const apiUrl = "https://0pah.dev:8081/api/products/stolen";
+
+      axios
+        .post(apiUrl, objToSend)
+        .then((response) => {
+          console.log("Réponse de l'API:", response.data);
+        })
+        .catch((error) => {
+          console.error("Erreur lors de l'envoi à l'API:", error);
+        });
+    });
   };
-  
 
   useEffect(() => {
     // Effectuer l'appel API pour récupérer les produits
@@ -232,14 +231,15 @@ export default function Distrib() {
           Panier
         </Button>
       </div>
-      {products.length ===0 ? 
+      {products.length === 0 ? (
         <Spinner
-        thickness='4px'
-        speed='0.65s'
-        emptyColor='gray.200'
-        color='blue.500'
-        size='xl'
-      /> : null}
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      ) : null}
       <div className="product-list">
         {products.map((product) => (
           <ProductCard

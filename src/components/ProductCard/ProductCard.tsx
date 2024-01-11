@@ -38,14 +38,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   };
 
   return (
-    <div className="product-card" onClick={handleCardClick}>
+    <div className="product-card">
       <Card
         style={{ display: "flex", flexDirection: "column", height: "100%" }}
       >
         <CardBody>
           <Image
+            onClick={handleCardClick}
             src={getUrlImageById(product.id)}
-            alt="Green double couch with wooden legs"
+            alt="Image bouteille"
+            minH={350}
+            maxH={350}
             borderRadius="lg"
           />
           <Stack mt="6" spacing="3">
